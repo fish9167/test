@@ -2,7 +2,7 @@
 name: Clang-Format
 
 # Controls when the action will run. Triggers the workflow on push for all branches
-on: pull_request
+on: push
 
 # Defines the main job where we checkout our code, run clang-format
 # and commit changes
@@ -20,6 +20,9 @@ jobs:
       with:
         style: 'file'
 
-    # Gets and prints the output message
+    - name: get diff
+      id: diff_files
+      run: git diff
+      
     - name: Get the output message
-      run: echo "${{ steps.formatting.outputs.message }}"
+      run: echo "${{ steps.diff_files.outputs.message }}"
