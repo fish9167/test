@@ -20,18 +20,10 @@ jobs:
       uses: amete/clang-format-action@v0.2
       with:
         style: 'file'
-    - name: File Changes Action
-      uses: trilom/file-changes-action@v1.2.4
-      id: test
-
-    - uses: LouisBrunner/checks-action@v1.1.1
-      if: always()
+  
+    - uses: zattoo/output@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test XYZ
-        conclusion: ${{ job.status }}
-        output: |
-          {"summary":${{ steps.test.outputs.summary }}}
-      
+        token: ${{github.token}}
+
     - name: Get the output message
       run: echo "${{ steps.diff_files.outputs.message }}"
