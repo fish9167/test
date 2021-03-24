@@ -2,7 +2,8 @@
 name: Clang-Format
 
 # Controls when the action will run. Triggers the workflow on push for all branches
-on: pull_request
+#on: pull_request
+on: push
 
 # Defines the main job where we checkout our code, run clang-format
 # and commit changes
@@ -21,6 +22,7 @@ jobs:
         style: 'file'
         
     - uses: LouisBrunner/checks-action@v1.1.1
+      id: test
       if: always()
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
