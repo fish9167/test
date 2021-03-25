@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
 
     # Applies clang-format to all C/C++ files w/ the specified style
-    - name: Apply clang-format
+    - name: Check clang-format
       uses: fish9167/clang-format-action@master
       id: formatting
       with:
