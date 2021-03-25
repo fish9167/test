@@ -22,7 +22,7 @@ jobs:
 
     - name: Echo Illegal document
       id: formatting
-      run: cat  clang-format-report.txt
+      run: git diff
 
     # Gets and prints the output message
     - name: Get the output message
