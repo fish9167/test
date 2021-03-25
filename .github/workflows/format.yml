@@ -19,7 +19,7 @@ jobs:
         
     - name: Echo Illegal document
       id: formatting
-      run: cat  clang-format-report.txt        
+      run: git diff
 
     - name: Get the output message
       run: echo "${{ steps.formatting.outputs.message }}"
