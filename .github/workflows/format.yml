@@ -2,7 +2,7 @@
 name: Clang-Format
 
 # Controls when the action will run. Triggers the workflow on push for all branches
-on: pull_request
+on: [push, pull_request]
 
 # Defines the main job where we checkout our code, run clang-format
 # and commit changes
@@ -16,7 +16,8 @@ jobs:
     # Applies clang-format to all C/C++ files w/ the specified style
     - name: Apply clang-format
       id: formatting
-      uses: fish9167/clang-format-action@v0.2
+      #uses: fish9167/clang-format-action@v0.2
+      uses: fish9167/clang-format-action@master
       with:
         style: 'file'
 
