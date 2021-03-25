@@ -1,8 +1,8 @@
 # Name of the workflow
 name: Clang-Format
 
-on: pull_request
-#on: [push, pull_request]
+#on: pull_request
+on: [push, pull_request]
 
 jobs:
   clang-format:
@@ -12,18 +12,11 @@ jobs:
     - uses: actions/checkout@v2
 
     # Applies clang-format to all C/C++ files w/ the specified style
-    #- name: Check clang-format
-    #  uses: fish9167/clang-format-action@master
-    #  id: formatting
-    #  with:
-    #    style: 'file'
-        
-    #- name: Get the output message
-    #  run: echo "${{ steps.formatting.outputs.message }}"
+    - name: Check clang-format
+      uses: fish9167/clang-format-action@master
+      id: formatting
+      with:
+        style: 'file'
 
-
-    - name: c-linter
-      uses: fish9167/clang-tidy-action@master
-    env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+    - name: Get the output message
+      run: echo "${{ steps.formatting.outputs.message }}"
