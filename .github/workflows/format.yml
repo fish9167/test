@@ -2,7 +2,7 @@
 name: Check Clang Format
 
 #on: [push, pull_request]
-on: pull_request_review_comment
+on: [push, pull_request_review_comment]
 
 jobs:
   clang-format:
