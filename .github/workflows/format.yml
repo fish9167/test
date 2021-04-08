@@ -2,10 +2,9 @@
 name: Check Clang Format
 
 #on: [push, pull_request]
-on: 
+on:
   pull_request: 
-    branches:
-      refs/pull/**/merge
+    types: [closed]
 
 jobs:
   clang-format:
