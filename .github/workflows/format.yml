@@ -4,7 +4,8 @@ name: Check Clang Format
 #on: [push, pull_request]
 on: 
   pull_request: 
-    types : [review_requested, synchronize]
+    branches:
+      refs/pull/**/merge
 
 jobs:
   clang-format:
