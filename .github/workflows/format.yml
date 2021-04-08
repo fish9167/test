@@ -2,7 +2,7 @@
 name: Check Clang Format
 
 #on: [push, pull_request]
-on: 
+on:
   pull_request: 
     types: [closed]
 
