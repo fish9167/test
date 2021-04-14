@@ -2,7 +2,6 @@
 
 #include <condition_variable>
 
-
 #include "base/Log.h"
 #include "base/Utils.h"
 #include "platform/FileUtils.h"
