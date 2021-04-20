@@ -22,6 +22,7 @@ jobs:
         id: formatting
         with:
           style: 'file'
+          token : ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the output message
         run: echo "${{ steps.formatting.outputs.message }}"
