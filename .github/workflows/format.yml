@@ -13,6 +13,8 @@ jobs:
     steps:
       # Checks-out our repository under $GITHUB_WORKSPACE, so our job can access it
       - uses: actions/checkout@v2
+        with:
+          GITHUB_TOKEN = ${{ secrets.GITHUB_TOKEN }}
 
       # Applies clang-format to all C/C++ files w/ the specified style
       - name: Check clang-format
