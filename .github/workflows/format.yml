@@ -16,8 +16,11 @@ jobs:
 
       # Applies clang-format to all C/C++ files w/ the specified style
       - name: Check clang-format
-        uses: cocos-creator/clang-format-action@master
+        uses: cocos-creator/clang-format-actionn@master
         id: formatting
+        env:
+          secrets_token: ${{ secrets.GITHUB_TOKEN }}
+          
         with:
           style: 'file'
 
