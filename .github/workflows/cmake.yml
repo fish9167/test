@@ -30,14 +30,19 @@ jobs:
         sed -i 's/modified://g' change.list
         cat change.list
         
-    - name: push files
+    - name: set commit msg
       run: |
         git diff --quiet && exit 0
         git config --global user.email "clang-format@github-actions"
         git config --global user.name "clang-format"
         git commit -a -m "Auto apply clang-format (Github Action)" || true
-        BRANCH=${GITHUB_REF#*refs/heads/}
-        git push -u origin $BRANCH
+
+    - name: Push changes
+      uses: fish9167/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        
         
         
 
