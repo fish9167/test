@@ -17,7 +17,7 @@ jobs:
     
     - name: install clang-format
       run: |
-        apt-get install clang-format git
+        sudo apt-get install clang-format git
     
     - name: apply clang-format
       run: |
