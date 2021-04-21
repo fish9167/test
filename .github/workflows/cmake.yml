@@ -1,0 +1,47 @@
+name: Run clang-format Linter
+
+on: [push, pull_request]
+#on:
+#  pull_request:
+#    types: [closed]
+
+jobs:
+  Clang-Format-Linter:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{secrets.GITHUB_TOKEN }}
+    
+    - name: install clang-format
+      run: |
+        apt-get install clang-format git
+    
+    - name: apply clang-format
+      run: |
+        cd ${{ GITHUB_WORKSPACE }}
+        SRC=$(git ls-tree --full-tree -r HEAD | grep -e "\.\(c\|h\|hpp\|cpp\|cxx\)\$" | cut -f 2)
+        clang-format -style=file -i $SRC
+        
+    - name: echo change file
+      run: |
+        cd ${{ GITHUB_WORKSPACE }}
+        git status | grep modified >> change.list
+        sed -i 's/modified://g' change.list
+        cat change.list
+        
+    - name: push files
+      run: |
+        cd ${{ GITHUB_WORKSPACE }}
+        [[ git diff --quiet ]] && exit 0
+        git config --global user.email "clang-format@github-actions"
+        git config --global user.name "clang-format"
+        git commit -a -m "Auto apply clang-format (Github Action)" || true
+        BRANCH=${GITHUB_REF#*refs/heads/}
+        git push -u origin $BRANCH
+        
+        
+
+        
