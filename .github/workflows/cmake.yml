@@ -24,11 +24,11 @@ jobs:
         SRC=$(git ls-tree --full-tree -r HEAD | grep -e "\.\(c\|h\|hpp\|cpp\|cxx\)\$" | cut -f 2)
         clang-format -style=file -i $SRC
         
-    #- name: echo change file
-    #  run: |
-    #    git status | grep modified >> change.list
-    #    sed -i 's/modified://g' change.list
-    #    cat change.list
+    - name: echo change file
+      run: |
+        git status | grep modified >> change.list
+        sed -i 's/modified://g' change.list
+        cat change.list
         
     #- name: set commit msg
     #  run: |
