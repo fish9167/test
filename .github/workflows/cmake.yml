@@ -30,12 +30,12 @@ jobs:
     #    sed -i 's/modified://g' change.list
     #    cat change.list
         
-    - name: set commit msg
-      run: |
-        git diff --quiet && exit 0
-        git config --global user.email "clang-format@github-actions"
-        git config --global user.name "clang-format"
-        git commit -a -m "Auto apply clang-format (Github Action)" || true
+    #- name: set commit msg
+    #  run: |
+    #    git diff --quiet && exit 0
+    #    git config --global user.email "clang-format@github-actions"
+    #    git config --global user.name "clang-format"
+    #    git commit -a -m "Auto apply clang-format (Github Action)" || true
 
     - name: Push changes
       uses: fish9167/github-push-action@master
