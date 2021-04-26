@@ -20,8 +20,7 @@ jobs:
       with:
         style: file
         
-    - name: "Run if changes have been detected"
-      if: steps.auto-commit-action.outputs.changes_detected == 'true'
+    - name: "PUSH"
       run:
         git config --local user.name fish9167
         git config --local user.email 674821954@qq.com
