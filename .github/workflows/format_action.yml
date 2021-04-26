@@ -1,4 +1,4 @@
-name: Run clang-format
+name: commit clang format
 
 #on: [push, pull_request]
 on:
@@ -13,13 +13,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PUSH_TOKEN || github.token }}
         ref: ${{ github.head_ref }}
-
+    
     - uses: fish9167/clang-format-action@v2
       with:
         style: file
-        
+    
     - uses: fish9167/git-auto-commit-action@v4
       with:
+        commit_message: Apply clang-format
+        #commit_user_name: fish9767
+        #commit_user_email: 674821954@qq.com
+        #commit_author: fish9767<674821954@qq.com>
         push_options: --force
