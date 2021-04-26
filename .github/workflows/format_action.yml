@@ -2,12 +2,12 @@ name: commit clang format
 
 #on: [push, pull_request]
 on:
-  pull_request:
+  pull_request_target:
     types: [closed]
 
 jobs:
   Clang-Format:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -19,17 +19,11 @@ jobs:
     - uses: fish9167/clang-format-action@v2
       with:
         style: file
-    - name: push
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "generated"
-        git push
-    #- uses: fish9167/git-auto-commit-action@v4
-    #  with:
-    #    commit_message: Apply clang-format
+
+    - uses: fish9167/git-auto-commit-action@v4
+      with:
+        commit_message: Apply clang-format
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
-    #    push_options: --force
+        push_options: --force
