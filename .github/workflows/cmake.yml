@@ -28,7 +28,7 @@ jobs:
     - uses: fish9167/git-auto-commit-action@v4
       with:
         commit_message: Apply clang-format
-        commit_user_name: fish0607
-        commit_user_email: 674821954@.com
-        commit_author: fish0607<674821954@.com>
+        commit_user_name: fish9767
+        commit_user_email: 674821954@qq.com
+        commit_author: fish9767<674821954@qq.com>
         push_options: --force
