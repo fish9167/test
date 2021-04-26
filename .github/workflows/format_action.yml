@@ -20,6 +20,10 @@ jobs:
       with:
         style: file
         
-    - uses: fish9167/git-auto-commit-action@v4
-      with:
-        push_options: --force
+    - name: "Run if changes have been detected"
+      if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        git config --local user.name fish9167
+        git config --local user.email 674821954@qq.com
+        git add .
+        git commit -m "Apply clang-format"
+        git push --force --quiet "https://fish9167:${{ secrets.GITHUB_TOKEN }}@github.com/fish9167/test.git" ${{ github.head_ref }}:${{ github.head_ref }}
