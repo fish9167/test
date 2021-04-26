@@ -13,12 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{secrets.GITHUP_TOKEN }}
+        token: ${{secrets.PAT }}
         ref: ${{ github.head_ref }}
 
     - uses: fish9167/clang-format-action@v2
       with:
         style: file
-    - uses: EndBug/add-and-commit@v7.0.0
+        
+    - uses: fish9167/git-auto-commit-action@v4
       with:
-        default_author: github_actions
+        push_options: --force
