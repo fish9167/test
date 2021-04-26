@@ -1,9 +1,9 @@
 name: commit clang format
 
-#on: [push, pull_request]
-on:
-  pull_request:
-    types: [closed]
+on: [push, pull_request]
+#on:
+#  pull_request:
+#    types: [closed]
 
 jobs:
   Clang-Format:
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PUSH_TOKEN}}
         ref: ${{ github.head_ref }}
     
     - uses: fish9167/clang-format-action@v2
