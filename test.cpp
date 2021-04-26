@@ -47,7 +47,7 @@
 
 #ifdef ERROR
 #undef ERROR
-#endif  // ERROR
+#endif // ERROR
 
 using namespace cc;
 
@@ -72,17 +72,13 @@ AudioEngine::AudioEngineThreadPool *AudioEngine::s_threadPool = nullptr;
 bool AudioEngine::_isEnabled = true;
 
 AudioEngine::AudioInfo::AudioInfo()
-    : filePath(nullptr),
-      profileHelper(nullptr),
-      volume(1.0f),
-      loop(false),
-      duration(TIME_UNKNOWN),
-      state(AudioState::INITIALIZING) {}
+    : filePath(nullptr), profileHelper(nullptr), volume(1.0f), loop(false),
+      duration(TIME_UNKNOWN), state(AudioState::INITIALIZING) {}
 
 AudioEngine::AudioInfo::~AudioInfo() {}
 
 class AudioEngine::AudioEngineThreadPool {
- public:
+public:
   AudioEngineThreadPool(int threads = 4) : _stop(false) {
     for (int index = 0; index < threads; ++index) {
       _workers.emplace_back(
@@ -108,7 +104,7 @@ class AudioEngine::AudioEngineThreadPool {
     }
   }
 
- private:
+private:
   void threadFunc() {
     while (true) {
       std::function<void()> task = nullptr;
