@@ -13,14 +13,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{secrets.GITHUB_TOKEN }}
+        #token: ${{secrets.GITHUB_TOKEN }}
+        persist-credentials: false
         ref: ${{ github.head_ref }}
 
     - uses: fish9167/clang-format-action@v2
       with:
         style: file
     
-    - uses: fish9167/git-auto-commit-action@v4
+    #- uses: fish9167/git-auto-commit-action@v4
+    #  with:
+    #    commit_message: Apply clang-format
+    #    push_options: --force
+    
+    - name: Commit files
+      run: |
+        git commit -m "Apply clangformat" -a
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
-        commit_message: Apply clang-format
-        push_options: --force
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        
