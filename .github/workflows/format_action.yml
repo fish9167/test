@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUP_TOKEN }}
+        token: ${{ secrets.BOT_PUSH }}
         ref: ${{ github.head_ref }}
 
     - uses: fish9167/clang-format-action@v2
