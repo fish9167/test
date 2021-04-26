@@ -1,19 +1,19 @@
 name: Run clang-format
 
-#on: [push, pull_request]
-on:
-  pull_request:
-    types: [closed]
+on: [push, pull_request]
+#on:
+#  pull_request:
+#    types: [closed]
 
 jobs:
   Clang-Format:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    #if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.BOT_PUSH }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         ref: ${{ github.head_ref }}
 
     - uses: fish9167/clang-format-action@v2
