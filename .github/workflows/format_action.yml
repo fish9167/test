@@ -28,6 +28,8 @@ jobs:
     
     - name: Commit files
       run: |
+        git config --local user.email "cocos-robot@cocos.com"
+        git config --local user.name "cocos-robot"
         git commit -m "Apply clangformat" -a
         
     - name: Push changes
