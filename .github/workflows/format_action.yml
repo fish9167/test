@@ -16,11 +16,14 @@ jobs:
         token: ${{ github.token }}
         ref: ${{ github.head_ref }}
     
-    - uses: fish9167/file-changes-action@v1.2.3
-      with:
-         output: ' '
-         fileOutput: ' '
-  
+    - id: get change files
+      uses: fish9167/get-changed-files@v1
+    - run: |
+        for changed_file in ${{ steps.files.outputs.all }}; do
+          echo "Do something with this ${changed_file}."
+        done
+        echo ${{ steps.files.outputs.all }} >> ${{home}}/files.txt
+
     - name: echo diff file
       run: |
         echo $HOME
