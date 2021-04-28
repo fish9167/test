@@ -16,10 +16,11 @@ jobs:
         token: ${{ github.token }}
         ref: ${{ github.head_ref }}
     
-    - id: get change files
-      uses: fish9167/get-changed-files@v1
-    - run: |
-        echo ${{ steps.files.outputs.all }} >> ${HOME}/files.txt
+    - id: file_changes
+      uses: trilom/file-changes-action@v1.2.3
+      with:
+        output: ' '
+        fileOutput: ' '
 
     - name: echo diff file
       run: |
