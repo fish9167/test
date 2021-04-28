@@ -16,7 +16,7 @@ jobs:
         token: ${{ github.token }}
         ref: ${{ github.head_ref }}
     
-    - id: get change files
+    - id: get_change_files
       uses: fish9167/file-changes-action@v1.2.3
       with:
         output: ' '
