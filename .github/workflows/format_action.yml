@@ -26,6 +26,8 @@ jobs:
       run: |
         echo $HOME
         cat $HOME/files.txt
+        echo "=----="
+        cat /home/runner/files.txt
     
     - uses: fish9167/clang-format-lint-action@master
       with:
