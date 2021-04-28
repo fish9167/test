@@ -18,7 +18,6 @@ jobs:
     
     - id: get change files
       uses: fish9167/get-changed-files@v1
-      
     - run: |
         echo ${{ steps.files.outputs.all }} >> ${HOME}/files.txt
 
