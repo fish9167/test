@@ -15,9 +15,10 @@ jobs:
       with:
         token: ${{ github.token }}
         #ref: ${{ github.head_ref }}
-        ref: ${{ github.base_ref }}
+        ref: ${{ githup.base_ref }}
         #ref: ${{ github.event.pull_request.head.ref }}
-        #repository: ${{ github.event.pull_request.head.repo.full_name }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        #ref: ${{ github.event.pull_request.head.ref }}
 
     
     - id: get_change_files
