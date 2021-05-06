@@ -41,7 +41,7 @@ jobs:
       with:
         commit_message: Apply clang-format
         #branch: ${{ github.head_ref }}
-        branch: refs/heads/${{ github.head_ref }}
+        branch: refs/heads/${{ github.base_ref }}
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
