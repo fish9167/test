@@ -15,8 +15,7 @@ jobs:
       with:
         token: ${{ github.token }}
         #ref: ${{ github.head_ref }}
-        ref: ${{ githup.base_ref }}
-        #ref: ${{ github.event.pull_request.head.ref }}
+        ref: ${{ github.event.pull_request.head.ref }}
         repository: ${{ github.event.pull_request.head.repo.full_name }}
 
     
