@@ -15,6 +15,10 @@ jobs:
       with:
         token: ${{ github.token }}
         #ref: ${{ github.head_ref }}
+        ref: ${{ githup.base_ref }}
+        #ref: ${{ github.event.pull_request.head.ref }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+
     
     - id: get_change_files
       uses: fish9167/file-changes-action@v1.2.3
@@ -22,7 +26,7 @@ jobs:
         output: ' '
         fileOutput: ' '
 
-    - name: echo change file
+    - name: get change files
       run: |
         cat $HOME/files.txt
         mv $HOME/files.txt ${{github.workspace}}/files.txt
@@ -37,6 +41,8 @@ jobs:
     - uses: fish9167/git-auto-commit-action@v4
       with:
         commit_message: Apply clang-format
+        #branch: ${{ github.head_ref }}
+        branch: ${{ github.base_ref }}
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
