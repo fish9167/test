@@ -1,10 +1,10 @@
 name: commit clang format
 
 #on: [push, pull_request]
-#on:
-#  pull_request_target:
-#    types: [closed]
-on: push
+on:
+  pull_request_target:
+    types: [closed]
+
 
 jobs:
   Clang-Format:
@@ -18,7 +18,7 @@ jobs:
         #ref: ${{ github.head_ref }}
         #ref: ${{ github.event.pull_request.head.ref }}
         #repository: ${{ github.event.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.pull_request.head.sha }}
+        ref: ${{ github.head_sha }}
 
     
     - id: get_change_files
