@@ -39,16 +39,16 @@ jobs:
         style: file
         inplace: True
         
-    - uses: pascalgn/automerge-action@v0.13.1
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    #- uses: pascalgn/automerge-action@v0.13.1
+    #  env:
+    #    GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
      
-    #- uses: fish9167/git-auto-commit-action@v4
-    #  with:
-    #    commit_message: Apply clang-format
+    - uses: fish9167/git-auto-commit-action@v4
+      with:
+        commit_message: Apply clang-format
         #branch: ${{ github.head_ref }}
-        #branch: ${{ github.base_ref }}
+        branch: ${{ github.base_ref }}
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
-    #    push_options: --force
+        push_options: --force
