@@ -1,10 +1,10 @@
 name: commit clang format
 
 #on: [push, pull_request]
-#on:
-#  pull_request_target:
-#    types: [closed]
-on: push
+on:
+  pull_request_target:
+    types: [closed]
+
 
 jobs:
   Clang-Format:
@@ -18,7 +18,7 @@ jobs:
         #ref: ${{ github.head_ref }}
         #ref: ${{ github.event.pull_request.head.ref }}
         #repository: ${{ github.event.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.pull_request.head.sha }}
+        ref: ${{ github.head_sha }}
 
     
     - id: get_change_files
@@ -39,11 +39,15 @@ jobs:
         style: file
         inplace: True
         
+    #- uses: pascalgn/automerge-action@v0.13.1
+    #  env:
+    #    GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+     
     - uses: fish9167/git-auto-commit-action@v4
       with:
         commit_message: Apply clang-format
         #branch: ${{ github.head_ref }}
-        #branch: ${{ github.base_ref }}
+        branch: ${{ github.base_ref }}
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
