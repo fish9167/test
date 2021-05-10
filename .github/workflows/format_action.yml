@@ -1,9 +1,10 @@
 name: commit clang format
 
 #on: [push, pull_request]
-on:
-  pull_request_target:
-    types: [closed]
+#on:
+#  pull_request_target:
+#    types: [closed]
+on: push
 
 jobs:
   Clang-Format:
@@ -14,10 +15,10 @@ jobs:
     - uses: actions/checkout@v2
       with:
         token: ${{ github.token }}
-        ref: ${{ github.head_ref }}
+        #ref: ${{ github.head_ref }}
         #ref: ${{ github.event.pull_request.head.ref }}
         #repository: ${{ github.event.pull_request.head.repo.full_name }}
-        #ref: ${{ github.event.pull_request.head.ref }}
+        ref: ${{ github.event.pull_request.head.sha }}
 
     
     - id: get_change_files
