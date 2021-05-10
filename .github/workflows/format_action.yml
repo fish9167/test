@@ -1,9 +1,10 @@
 name: commit clang format
 
 #on: [push, pull_request]
-on:
-  pull_request_target:
-    types: [closed]
+#on:
+#  pull_request_target:
+#    types: [closed]
+on: push
 
 jobs:
   Clang-Format:
@@ -15,8 +16,9 @@ jobs:
       with:
         token: ${{ github.token }}
         #ref: ${{ github.head_ref }}
-        ref: ${{ github.event.pull_request.head.ref }}
-        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        #ref: ${{ github.event.pull_request.head.ref }}
+        #repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.sha }}
 
     
     - id: get_change_files
@@ -41,7 +43,7 @@ jobs:
       with:
         commit_message: Apply clang-format
         #branch: ${{ github.head_ref }}
-        branch: ${{ github.base_ref }}
+        #branch: ${{ github.base_ref }}
         #commit_user_name: fish9767
         #commit_user_email: 674821954@qq.com
         #commit_author: fish9767<674821954@qq.com>
