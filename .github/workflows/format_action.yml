@@ -46,7 +46,6 @@ jobs:
         git config --local user.name "github-actions-clang-format[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git commit -a -m 'Automated clang-format update'
-        git config add upstream "https://github.com/fish0607/test.git"
       continue-on-error: true
       
     - name: Create Pull Request 
