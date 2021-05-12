@@ -60,11 +60,13 @@ jobs:
           token: ${{ secrets.bot_token }}
           push-to-fork: fish0607/test
           #base: ${{ github.base_ref }}
-          base: ww
           # 对应的上传分支
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
           delete-branch: true
+          labels: |
+            report
+            automated pr
           
     #- uses: fish9167/git-auto-commit-action@v4
     #  with:
