@@ -56,6 +56,7 @@ jobs:
           body: |
             Automated PR to fix formatting errors
           committer: fish0607 <yuj0607@163.com>
+          author: fish0607 <fish0607@163.com>
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
           token: ${{ secrets.bot_token }}
