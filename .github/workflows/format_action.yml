@@ -44,7 +44,6 @@ jobs:
         git config --local user.name "github-actions-clang-format[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        echo ${{ env.pull_number }
         git commit -a -m "[ci skip][AUTO]: Automated clang-format update:  ${{ github.head_sha }} (${PR_NUMBER})"
       continue-on-error: true
         
