@@ -29,10 +29,6 @@ jobs:
       run: |
         cat $HOME/files.txt
         mv $HOME/files.txt ${{github.workspace}}/files.txt
-        pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-      env:
-        sha: ${{ github.head_sha }}
-        pull_number: ${pull_number}
     
     - uses: fish9167/clang-format-lint-action@master
       id: format
@@ -41,10 +37,16 @@ jobs:
         extensions: 'c,h,hpp,cpp,cxx'
         style: file
         inplace: True
-    - name: echo git config
+        
+      
+    - name: set git config
       run: |
-        echo  ${{ env.sha }} 
+        git config --local user.name "github-actions-clang-format[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         echo ${{ env.pull_number }
+        git commit -a -m "[ci skip][AUTO]: Automated clang-format update:  ${{ github.head_sha }} (${PR_NUMBER})"
+      continue-on-error: true
         
     #- name: Commit files
     #  run: |
