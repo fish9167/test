@@ -1,15 +1,13 @@
 name: Apply clang format
 
-#on: [push, pull_request]
-on: [pull_request]
-#on:
-#  pull_request_target:
-#    types: [closed]
+on:
+  pull_request_target:
+    types: [closed]
 
 
 jobs:
   Clang-Format:
-    #if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -59,7 +57,9 @@ jobs:
           committer: fish0607 <yuj0607@163.com>
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
-          token： ${{ githup.bot_token }}
+          token: ${{ secrets.bot_token }}
+          push-to-fork: fish0607/test
+          base: ${{ github.base_ref }}
           # 对应的上传分支
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
