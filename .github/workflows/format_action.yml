@@ -61,7 +61,7 @@ jobs:
           #assignees: lindexi,walterlv
           #reviewers: lindexi,walterlv
           # 对应的上传分支
-          #branch: t/bot/fix-codeformatting
+          branch: t/bot/fix-codeformatting
     #- uses: fish9167/git-auto-commit-action@v4
     #  with:
     #    commit_message: Apply clang-format
