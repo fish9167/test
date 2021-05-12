@@ -64,9 +64,7 @@ jobs:
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
           delete-branch: true
-          labels: |
-            report
-            automated pr
+
           
     #- uses: fish9167/git-auto-commit-action@v4
     #  with:
