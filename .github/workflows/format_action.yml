@@ -1,14 +1,14 @@
 name: Apply clang format
 
-#on: [push, pull_request]
-on:
-  pull_request_target:
-    types: [closed]
+on: [push, pull_request]
+#on:
+#  pull_request_target:
+#    types: [closed]
 
 
 jobs:
   Clang-Format:
-    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    #if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -39,10 +39,17 @@ jobs:
         extensions: 'c,h,hpp,cpp,cxx'
         style: file
         inplace: True
-    
+
+    - name: Commit files
+      run: |
+        git config --local user.name "github-actions-clang-format[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git commit -a -m 'Automated clang-format update'
+      continue-on-error: true
+      
     - name: Create Pull Request 
       # 如果有格式化，才继续
-      if: steps.format.outputs.has-changes == 'true'
+      #if: steps.format.outputs.has-changes == 'true'
       uses: fish9167/create-pull-request@v3
       with:
           title: '[Bot] Automated PR to fix formatting errors'
