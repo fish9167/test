@@ -69,6 +69,7 @@ jobs:
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
           delete-branch: true
+          milestone: 1
 
           
     #- uses: fish9167/git-auto-commit-action@v4
