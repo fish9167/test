@@ -42,6 +42,7 @@ jobs:
     - name: Commit files
       run: |
         PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
+        echo ${{ PR_NUMBER }}
         git config --local user.name "github-actions-clang-format[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git commit -a -m "[ci skip][AUTO]: Automated clang-format update: ${PR_NUMBER}"
