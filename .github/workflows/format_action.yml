@@ -39,13 +39,13 @@ jobs:
         inplace: True
         
       
-    - name: set git config
-      run: |
-        git config --local user.name "github-actions-clang-format[bot]"
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        git commit -a -m "[ci skip][AUTO]: Automated clang-format update:  ${{ github.head_sha }} (${PR_NUMBER})"
-      continue-on-error: true
+    #- name: set git config
+    #  run: |
+    #    git config --local user.name "github-actions-clang-format[bot]"
+    #    git config --local user.email "github-actions[bot]@users.noreply.github.com"
+    #    pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+    #    git commit -a -m "[ci skip][AUTO]: Automated clang-format update:  ${{ github.head_sha }} (${PR_NUMBER})"
+    #  continue-on-error: true
         
     #- name: Commit files
     #  run: |
@@ -68,7 +68,7 @@ jobs:
             Automated PR to fix formatting errors
           committer: fish0607 <yuj0607@163.com>
           author: fish0607 <yuj0607@163.com>
-          #commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ env.sha }} (${{ env.pull_number }})"
+          commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ github.head_sha }} (#${{ github.event.number }})"
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
           token: ${{ secrets.bot_token }}
