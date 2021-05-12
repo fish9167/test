@@ -37,28 +37,6 @@ jobs:
         extensions: 'c,h,hpp,cpp,cxx'
         style: file
         inplace: True
-        
-      
-    #- name: set git config
-    #  run: |
-    #    git config --local user.name "github-actions-clang-format[bot]"
-    #    git config --local user.email "github-actions[bot]@users.noreply.github.com"
-    #    pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-    #    git commit -a -m "[ci skip][AUTO]: Automated clang-format update:  ${{ github.head_sha }} (${PR_NUMBER})"
-    #  continue-on-error: true
-        
-    #- name: Commit files
-    #  run: |
-    #    git config --local user.name "github-actions-clang-format[bot]"
-    #    git config --local user.email "github-actions[bot]@users.noreply.github.com"
-    #    git commit -a -m "[ci skip][AUTO]: Automated clang-format update"
-    #    PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
-    #    echo ${GITHUB_REF}
-    #    echo ${PR_NUMBER}
-    #    git config --local user.name "github-actions-clang-format[bot]"
-    #    git config --local user.email "github-actions[bot]@users.noreply.github.com"
-    #    git commit -a -m "[ci skip][AUTO]: Automated clang-format update: ${PR_NUMBER}"
-    #  continue-on-error: true
       
     - name: Create Pull Request 
       uses: fish9167/create-pull-request@v3
@@ -68,7 +46,7 @@ jobs:
             Automated PR to fix formatting errors
           committer: fish0607 <yuj0607@163.com>
           author: fish0607 <yuj0607@163.com>
-          commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ github.head_ref }}  (#${{ github.event.number }})"
+          commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ github.head_sha  }}  (#${{ github.event.number }})"
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
           token: ${{ secrets.bot_token }}
