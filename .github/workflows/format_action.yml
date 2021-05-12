@@ -41,7 +41,11 @@ jobs:
         extensions: 'c,h,hpp,cpp,cxx'
         style: file
         inplace: True
-
+    - name: echo git config
+      run: |
+        echo  ${{ env.sha }} 
+        echo ${{ env.pull_number }
+        
     #- name: Commit files
     #  run: |
     #    git config --local user.name "github-actions-clang-format[bot]"
@@ -63,7 +67,7 @@ jobs:
             Automated PR to fix formatting errors
           committer: fish0607 <yuj0607@163.com>
           author: fish0607 <yuj0607@163.com>
-          commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ env.sha }} (${{ env.pull_number }})"
+          #commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ env.sha }} (${{ env.pull_number }})"
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
           token: ${{ secrets.bot_token }}
