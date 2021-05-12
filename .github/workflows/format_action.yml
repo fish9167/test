@@ -41,6 +41,9 @@ jobs:
 
     #- name: Commit files
     #  run: |
+    #    git config --local user.name "github-actions-clang-format[bot]"
+    #    git config --local user.email "github-actions[bot]@users.noreply.github.com"
+    #    git commit -a -m "[ci skip][AUTO]: Automated clang-format update"
     #    PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
     #    echo ${GITHUB_REF}
     #    echo ${PR_NUMBER}
@@ -51,7 +54,7 @@ jobs:
       
     - name: Create Pull Request 
       # 如果有格式化，才继续
-      #if: steps.format.outputs.has-changes == 'true'
+      if: steps.format.outputs.has-changes == 'true'
       uses: fish9167/create-pull-request@v3
       with:
           title: '[Bot] Automated PR to fix formatting errors'
