@@ -1,7 +1,7 @@
 name: Apply clang format
 
 #on: [push, pull_request]
-on: [pull_request]
+on: [pull_request_target]
 #on:
 #  pull_request_target:
 #    types: [closed]
@@ -61,6 +61,7 @@ jobs:
           #reviewers: xxx,xxx
           token: ${{ secrets.bot_token }}
           push-to-fork: fish0607/test
+          base: test
           # 对应的上传分支
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
