@@ -51,7 +51,7 @@ jobs:
       
     - name: Create Pull Request 
       # 如果有格式化，才继续
-      if: steps.format.outputs.has-changes == 'true'
+      #if: steps.format.outputs.has-changes == 'true'
       uses: fish9167/create-pull-request@v3
       with:
           title: '[Bot] Automated PR to fix formatting errors'
