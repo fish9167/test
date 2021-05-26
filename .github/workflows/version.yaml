@@ -1,8 +1,10 @@
 name: change version
 
-on: create
+#on: create
+on: push
+
 jobs:
-  Change Version:
+  Change-Package-Version:
     runs-on: ubuntu-latest
     
     steps:
@@ -16,5 +18,4 @@ jobs:
         echo "Old Version: ${version}"
         new_version="\"version\": \"${{ github.head_sha }},"
         echo "New Version: ${new_version}"
-        sed -i "s/${version=}/"version": "${{ github.head_sha }},""  ${{github.workspace}}/package.json
-        
+        sed -i "s/${version=}/${new_version}" ${{github.workspace}}/package.json
