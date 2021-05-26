@@ -17,8 +17,9 @@ jobs:
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
         old_version=`cat ${file} | grep version`
         new_version="  \"version\": \"${branch}\","
-        echo "Old: ${old_version}
-        echo "New: ${new_version}
+        echo "Old: ${old_version}"
+        echo "New: ${new_version}"
+        echo "Bracnh: ${branch}"
         echo "Pachage.json File: ${file}"
         if [[ ${old_version} == ${new_version} ]];then
           echo "no need change"
@@ -53,8 +54,9 @@ jobs:
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
         old_version=`cat ${file} | grep version`
         new_version="  \"version\": \"${branch}\","
-        echo "Old: ${old_version}
-        echo "New: ${new_version}
+        echo "Old: ${old_version}"
+        echo "New: ${new_version}"
+        echo "Bracnh: ${branch}"
         echo "Pachage.json File: ${file}"
         if [[ ${old_version} == ${new_version} ]];then
           echo "no need change"
