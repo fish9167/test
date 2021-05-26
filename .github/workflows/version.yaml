@@ -10,11 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: ${{ github.head_sha }}
+        ref: ${{ github.head_ref }}
     - uses: actions/setup-python@v2
       with:
         python-version: '3.7'
     
     - name: change version
       run: |
-        python ${{github.workspace}}/package.json ${{ github.head_sha }}
+        python ${{github.workspace}}/package.json ${{ github.head_ref }}
