@@ -12,5 +12,9 @@ jobs:
     
     - name: change version
       run: |
-      	old_version=`cat ${{github.workspace}}/package.json | grep version`
-      	sed -i "s/${old_version=}/"version": "${{ github.head_sha }},""   ${{github.workspace}}/package.json
+        version=`cat ${{github.workspace}}/package.json | grep version`
+        echo "Old Version: ${version}"
+        new_version="\"version\": \"${{ github.head_sha }},"
+        echo "New Version: ${new_version}"
+        sed -i "s/${version=}/"version": "${{ github.head_sha }},""  ${{github.workspace}}/package.json
+        
