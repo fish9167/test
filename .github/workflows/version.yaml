@@ -22,6 +22,6 @@ jobs:
       run: |
         file=${{github.workspace}}/package.json
         old_version=`cat ${file} | grep version`
-        new_version="\"version\": \"${branch}\","
-        echo "Old: ${old_version}, New: ${new_version}, File: %{file}"
+        new_version="\"version\": \"${{ github.head_ref }}\","
+        echo "Old: ${old_version}, New: ${new_version}, File: ${file}"
         sed -i "s/${old_version}/${new_version}/g" ${file} ${{ github.head_ref }}
