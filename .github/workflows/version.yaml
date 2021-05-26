@@ -11,12 +11,10 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_sha }}
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.7.'
     
     - name: change version
       run: |
-        version=`cat ${{github.workspace}}/package.json | grep version`
-        echo "Old Version: ${version}"
-        echo "branch: ${{ github.head_sha }}"
-        new_version=""version": "${{ github.head_sha }},""
-        echo "New Version: ${new_version}"
-        sed -i "s/${version=}/${new_version}" ${{github.workspace}}/package.json
+        python ${{github.workspace}}/package.json ${{ github.head_sha }}
