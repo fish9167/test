@@ -1,0 +1,16 @@
+name: change version
+
+on: create
+jobs:
+  Change Version:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_sha }}
+    
+    - name: change version
+      run: |
+      	old_version=`cat ${{github.workspace}}/package.json | grep version`
+      	sed -i "s/${old_version=}/"version": "${{ github.head_sha }},""   ${{github.workspace}}/package.json
