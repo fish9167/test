@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: change version
+      id: change
       run: |
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
@@ -19,13 +20,16 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
-        if [[ ${old_version} == ${new_version} ]];then
-          echo "::stop-commands::pause-logging"
+        if [[ ${old_version} = ${new_version} ]];then
+          echo "::set-output message =false"
+        else
+          echo "::set-output message =true"        
+          sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
-        sed -i "s/${old_version}/${new_version}/g" ${file}
-    - name: echo change result
+    - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
+    if steps.change.outputs.message == 'true'   
     - name: git push
       run: |
         git config --global user.email "githup action@githup.com"
@@ -41,6 +45,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: change version
+      id: change    
       run: |
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
@@ -49,13 +54,16 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
-        if [[ ${old_version} == ${new_version} ]];then
-          echo "::stop-commands::pause-logging"
+        if [[ ${old_version} = ${new_version} ]];then
+          echo "::set-output message =false"
+        else
+          echo "::set-output message =true"
+          sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
-        sed -i "s/${old_version}/${new_version}/g" ${file}
-    - name: echo change result
+    - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
+    if steps.change.outputs.message == 'true'
     - name: git push
       run: |
         git config --global user.email "githup action@githup.com"
