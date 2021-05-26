@@ -24,6 +24,8 @@ jobs:
         cat ${{github.workspace}}/package.json | grep version
     - name: git push
       run: |
+        git config --global user.email "githup action@githup.com"
+        git config --global user.name "githup action"
         git add package.json
         git commit -m "change version"
         git push ${{github.ref}}
