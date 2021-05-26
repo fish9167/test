@@ -53,7 +53,8 @@ jobs:
       run: |
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'/' '{print $NF}'`
-        if [[ ${branch:0:1} == "v" or ${branch:0:1} == "V" ]]; then
+        first=${branch:0:1}
+        if [[ ${first} == "v" or ${first} == "V" ]]; then
           version=`echo ${branch} | awk -F'v' '{print $2}'`
           old_version=`cat ${file} | grep version`
           new_version="  \"version\": \"${version}\","
@@ -63,7 +64,7 @@ jobs:
             echo "Old: ${old_version}"
             echo "New: ${new_version}"
             echo "Branch: ${branch}"
-            echo "Pachage.json File: ${file}"
+            echo "Package.json File: ${file}"
             sed -i "s/${old_version}/${new_version}/g" ${file}
           fi
         else
