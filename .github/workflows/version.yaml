@@ -52,18 +52,24 @@ jobs:
       id: change    
       run: |
         file=${{github.workspace}}/package.json
-        branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
-        old_version=`cat ${file} | grep version`
-        new_version="  \"version\": \"${branch}\","
-        if [[ ${old_version} == ${new_version} ]];then
-          echo "no need change"
-        elif [[ "${branch=}" != "" ]];then
-          echo "Old: ${old_version}"
-          echo "New: ${new_version}"
-          echo "Bracnh: ${branch}"
-          echo "Pachage.json File: ${file}"
-          sed -i "s/${old_version}/${new_version}/g" ${file}
+        branch=`echo ${{github.ref}} | awk -F'/' '{print $NF}'`
+        if [[ ${branch:0:1} == "v" or ${branch:0:1} == "V" ]]; then
+          version=`echo ${branch} | awk -F'v' '{print $2}'`
+          old_version=`cat ${file} | grep version`
+          new_version="  \"version\": \"${version}\","
+          if [[ ${old_version} == ${new_version} ]];then
+            echo "no need change"
+          else
+            echo "Old: ${old_version}"
+            echo "New: ${new_version}"
+            echo "Branch: ${branch}"
+            echo "Pachage.json File: ${file}"
+            sed -i "s/${old_version}/${new_version}/g" ${file}
+          fi
+        else
+          echo "Branch: ${branch}"
         fi
+          
     - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
