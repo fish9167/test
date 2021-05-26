@@ -11,10 +11,17 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.head_ref }}
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.7'
+    #- uses: actions/setup-python@v2
+    #  with:
+    #    python-version: '3.7'
     
-    - name: change version
+    #- name: change version
+    #  run: |
+    #    python ${{github.workspace}}/package.json ${{ github.head_ref }}
+    - name: change
       run: |
-        python ${{github.workspace}}/package.json ${{ github.head_ref }}
+        file=${{github.workspace}}/package.json
+        old_version=`cat ${file} | grep version`
+        new_version="\"version\": \"${branch}\","
+        echo "Old: ${old_version}, New: ${new_version}, File: %{file}"
+        sed -i "s/${old_version}/${new_version}/g" ${file} ${{ github.head_ref }}
