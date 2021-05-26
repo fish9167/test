@@ -28,4 +28,5 @@ jobs:
         git config --global user.name "githup action"
         git add package.json
         git commit -m "change version"
-        git push ${{github.ref}}
+        branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
+        git push origin  ${branch}
