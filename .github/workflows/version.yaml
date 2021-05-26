@@ -23,7 +23,7 @@ jobs:
         echo "Pachage.json File: ${file}"
         if [[ ${old_version} == ${new_version} ]];then
           echo "no need change"
-        else
+        elif [[ "${branch=}" != "" ]];then
           sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
     - name: echo package.json
@@ -61,7 +61,7 @@ jobs:
         echo "Pachage.json File: ${file}"
         if [[ ${old_version} == ${new_version} ]];then
           echo "no need change"
-        else
+        elif [[ "${branch=}" != "" ]];then
           sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
     - name: echo package.json
@@ -79,4 +79,3 @@ jobs:
         else
           echo "no need push"
         fi
-        
