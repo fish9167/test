@@ -29,7 +29,8 @@ jobs:
     - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
-    if steps.change.outputs.message == 'true'   
+        
+      if: steps.change.outputs.message == 'true'   
     - name: git push
       run: |
         git config --global user.email "githup action@githup.com"
@@ -63,7 +64,8 @@ jobs:
     - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
-    if steps.change.outputs.message == 'true'
+      
+      if: steps.change.outputs.message == 'true'
     - name: git push
       run: |
         git config --global user.email "githup action@githup.com"
