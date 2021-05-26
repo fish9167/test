@@ -24,5 +24,6 @@ jobs:
         cat ${{github.workspace}}/package.json | grep version
     - name: git push
       run: |
-        git add ${{github.workspace}}/package.json
-        git push
+        git add package.json
+        git commit -m "change version"
+        git push ${{github.ref}}
