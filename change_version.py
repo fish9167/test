@@ -5,7 +5,7 @@ import json
 import sys
 
 file_path=sys.argv[1]
-version=sys.argv[2]
+version=sys.argv[2].split("v")[-1]
 
 print("change version: %s, file: %s" %(version, file_path))
 
