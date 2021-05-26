@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: change version
-      id: change
+      id: change    
       run: |
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
@@ -23,15 +23,16 @@ jobs:
         echo "Pachage.json File: ${file}"
         if [[ ${old_version} == ${new_version} ]];then
           echo "no need change"
-        else      
+        else
           sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
     - name: echo package.json
       run: |
-        cat ${{github.workspace}}/package.json | grep version 
+        cat ${{github.workspace}}/package.json | grep version
+    
     - name: git push
       run: |
-        if [ ! git diff --quiet ]; then
+        if ! git diff --quiet; then
           git config --global user.email "githup action@githup.com"
           git config --global user.name "githup action"
           git add package.json
@@ -78,3 +79,4 @@ jobs:
         else
           echo "no need push"
         fi
+        
