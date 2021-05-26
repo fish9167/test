@@ -20,24 +20,25 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
-        if [[ ${old_version} = ${new_version} ]];then
-          echo "::set-output message =false"
-        else
-          echo "::set-output message =true"        
+        if [[ ${old_version} == ${new_version} ]];then
+          echo "no need change"
+        else      
           sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
     - name: echo package.json
       run: |
-        cat ${{github.workspace}}/package.json | grep version
-        
-      if: steps.change.outputs.message == 'true'   
+        cat ${{github.workspace}}/package.json | grep version 
     - name: git push
       run: |
-        git config --global user.email "githup action@githup.com"
-        git config --global user.name "githup action"
-        git add package.json
-        git commit -m "change version"
-        git push
+        if [ ! git diff --quiet ]; then
+          git config --global user.email "githup action@githup.com"
+          git config --global user.name "githup action"
+          git add package.json
+          git commit -m "change version"
+          git push
+        else
+          echo "no need push"
+        fi
 
   Check_create:
     if: github.event_name == 'create'
@@ -55,21 +56,23 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
-        if [[ ${old_version} = ${new_version} ]];then
-          echo "::set-output message =false"
+        if [[ ${old_version} == ${new_version} ]];then
+          echo "no need change"
         else
-          echo "::set-output message =true"
           sed -i "s/${old_version}/${new_version}/g" ${file}
         fi
     - name: echo package.json
       run: |
         cat ${{github.workspace}}/package.json | grep version
-      
-      if: steps.change.outputs.message == 'true'
+    
     - name: git push
       run: |
-        git config --global user.email "githup action@githup.com"
-        git config --global user.name "githup action"
-        git add package.json
-        git commit -m "change version"
-        git push
+        if [ ! git diff --quiet ]; then
+          git config --global user.email "githup action@githup.com"
+          git config --global user.name "githup action"
+          git add package.json
+          git commit -m "change version"
+          git push
+        else
+          echo "no need push"
+        fi
