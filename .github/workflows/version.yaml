@@ -19,6 +19,9 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
+        if [[ ${old_version} == ${new_version} ]];then
+          echo "::stop-commands::pause-logging"
+        fi
         sed -i "s/${old_version}/${new_version}/g" ${file}
     - name: echo change result
       run: |
@@ -46,6 +49,9 @@ jobs:
         echo "Old: ${old_version}
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
+        if [[ ${old_version} == ${new_version} ]];then
+          echo "::stop-commands::pause-logging"
+        fi
         sed -i "s/${old_version}/${new_version}/g" ${file}
     - name: echo change result
       run: |
