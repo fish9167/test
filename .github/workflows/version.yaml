@@ -54,7 +54,7 @@ jobs:
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'/' '{print $NF}'`
         first=${branch:0:1}
-        if [[ ${first} == "v"]];then
+        if [[ ${first} == "v" ]];then
           version=`echo ${branch} | awk -F'v' '{print $2}'`
         elif [[ ${first} == "V" ]]; then
           version=`echo ${branch} | awk -F'V' '{print $2}'`
