@@ -19,7 +19,7 @@ jobs:
     - name: change
       run: |
         file=${{github.workspace}}/package.json
-        branch=`${{github.ref}} | awk -F'v' '{print $2}'`
+        branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
         old_version=`cat ${file} | grep version`
         new_version="\"version\": \"${branch"}\","
         echo "Old: ${old_version}
