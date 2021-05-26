@@ -9,8 +9,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
     #- uses: actions/setup-python@v2
     #  with:
     #    python-version: '3.7'
@@ -21,7 +19,8 @@ jobs:
     - name: change
       run: |
         file=${{github.workspace}}/package.json
+        branch=${github.ref}
         old_version=`cat ${file} | grep version`
-        new_version="\"version\": \"${{ github.head_ref }}\","
+        new_version="\"version\": \"${branch#"v"}\","
         echo "Old: ${old_version}, New: ${new_version}, File: ${file}"
         sed -i "s/${old_version}/${new_version}/g" ${file}
