@@ -1,7 +1,7 @@
 name: change version
 
-#on: create
-on: push
+on: create
+#on: push
 
 jobs:
   Change-Package-Version:
