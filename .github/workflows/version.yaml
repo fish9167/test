@@ -16,6 +16,6 @@ jobs:
       run: |
         version=`cat ${{github.workspace}}/package.json | grep version`
         echo "Old Version: ${version}"
-        new_version="\"version\": \"${{ github.head_sha }},"
+        new_version=""version": "${{ github.head_sha }},"
         echo "New Version: ${new_version}"
         sed -i "s/${version=}/${new_version}" ${{github.workspace}}/package.json
