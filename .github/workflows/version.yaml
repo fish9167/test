@@ -19,8 +19,10 @@ jobs:
     - name: change
       run: |
         file=${{github.workspace}}/package.json
-        branch=${{github.ref}}
+        branch=`${{github.ref}} | awk -F'v' '{print $2}'`
         old_version=`cat ${file} | grep version`
-        new_version="\"version\": \"${branch#"v"}\","
-        echo "Old: ${old_version}, New: ${new_version}, File: ${file}"
+        new_version="\"version\": \"${branch"}\","
+        echo "Old: ${old_version}
+        echo "New: ${new_version}
+        echo "Pachage.json File: ${file}"
         sed -i "s/${old_version}/${new_version}/g" ${file}
