@@ -9,14 +9,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    #- uses: actions/setup-python@v2
-    #  with:
-    #    python-version: '3.7'
-    
-    #- name: change version
-    #  run: |
-    #    python ${{github.workspace}}/package.json ${{ github.head_ref }}
-    - name: change
+    - name: change version
       run: |
         file=${{github.workspace}}/package.json
         branch=`echo ${{github.ref}} | awk -F'v' '{print $2}'`
@@ -26,3 +19,10 @@ jobs:
         echo "New: ${new_version}
         echo "Pachage.json File: ${file}"
         sed -i "s/${old_version}/${new_version}/g" ${file}
+    - name: echo change result
+      run: |
+        cat ${{github.workspace}}/package.json | grep version
+    - name: git push
+      run: |
+        git add ${{github.workspace}}/package.json
+        git push
