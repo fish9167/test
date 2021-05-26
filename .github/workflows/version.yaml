@@ -69,7 +69,7 @@ jobs:
     
     - name: git push
       run: |
-        if [[ ! git diff --quiet ]]; then
+        if ! git diff --quiet; then
           git config --global user.email "githup action@githup.com"
           git config --global user.name "githup action"
           git add package.json
