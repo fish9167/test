@@ -1,0 +1,27 @@
+name: systeminfo
+
+on: [push]
+
+jobs:
+  win_systeminfo:
+
+    runs-on: windows-2016
+
+    steps:
+    - name: systeminfo
+      run: |
+        systeminfo
+   
+  mac_systeminfo:
+    runs-on: macos-latest
+
+    steps:
+   
+    - name: systeminfo
+      run: |
+        sysctl machdep.cpu.thread_count
+        top -l 1 | head -n 10 | grep PhysMem
+  linux_systeminfo:
+    runs-on: ubuntu-latest
+      free -m
+      cat /proc/cpuinfo 
