@@ -49,7 +49,7 @@ jobs:
           commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ github.event.pull_request.head.sha }}  (#${{ github.event.number }})"
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
-          token: ${{ secrets.bot_token }}
+          token: ${{ secrets.BOT_TOKEN }}
           push-to-fork: fish0607/test
           #base: ${{ github.base_ref }}
           # 对应的上传分支
