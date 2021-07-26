@@ -1,0 +1,107 @@
+name: change version
+
+#on: create
+on: [create, pull_request_target]
+
+jobs:
+  Check_pull_requese_merged:
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: change version
+      id: change    
+      run: |
+        file=${{github.workspace}}/package.json
+        branch=`echo ${{github.ref}} | awk -F'/' '{print $NF}'`
+        first=${branch:0:1}
+        if [[ ${first} == "v" ]];then
+          version=`echo ${branch} | awk -F'v' '{print $2}'`
+        elif [[ ${first} == "V" ]]; then
+          version=`echo ${branch} | awk -F'V' '{print $2}'`
+        else
+          version=""
+        fi
+        if [[ ${version} != "" ]];then
+          old_version=`cat ${file} | grep version`
+          new_version="  \"version\": \"${version}\","
+          if [[ ${old_version} == ${new_version} ]];then
+            echo "no need change"
+          else
+            echo "Old: ${old_version}"
+            echo "New: ${new_version}"
+            echo "Branch: ${branch}"
+            echo "Package.json File: ${file}"
+            sed -i "s/${old_version}/${new_version}/g" ${file}
+          fi
+        else
+          echo "Branch name irregular: ${branch}"
+        fi
+          
+    - name: echo package.json
+      run: |
+        cat ${{github.workspace}}/package.json | grep version
+    
+    - name: git push
+      run: |
+        if ! git diff --quiet; then
+          git config --global user.email "githup action@githup.com"
+          git config --global user.name "githup action"
+          git add package.json
+          git commit -m "change version"
+          git push
+        else
+          echo "no need push"
+        fi
+
+  Check_create:
+    if: github.event_name == 'create'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: change version
+      id: change    
+      run: |
+        file=${{github.workspace}}/package.json
+        branch=`echo ${{github.ref}} | awk -F'/' '{print $NF}'`
+        first=${branch:0:1}
+        if [[ ${first} == "v" ]];then
+          version=`echo ${branch} | awk -F'v' '{print $2}'`
+        elif [[ ${first} == "V" ]]; then
+          version=`echo ${branch} | awk -F'V' '{print $2}'`
+        else
+          version=""
+        fi
+        if [[ ${version} != "" ]];then
+          old_version=`cat ${file} | grep version`
+          new_version="  \"version\": \"${version}\","
+          if [[ ${old_version} == ${new_version} ]];then
+            echo "no need change"
+          else
+            echo "Old: ${old_version}"
+            echo "New: ${new_version}"
+            echo "Branch: ${branch}"
+            echo "Package.json File: ${file}"
+            sed -i "s/${old_version}/${new_version}/g" ${file}
+          fi
+        else
+          echo "Branch name irregular: ${branch}"
+        fi
+          
+    - name: echo package.json
+      run: |
+        cat ${{github.workspace}}/package.json | grep version
+    
+    - name: git push
+      run: |
+        if ! git diff --quiet; then
+          git config --global user.email "githup action@githup.com"
+          git config --global user.name "githup action"
+          git add package.json
+          git commit -m "change version"
+          git push
+        else
+          echo "no need push"
+        fi

@@ -1,17 +1,15 @@
 name: Apply clang format
 
-#on: [push, pull_request]
-on: [pull_request]
-#on:
-#  pull_request_target:
-#    types: [closed]
+on:
+  pull_request_target:
+    types: [closed]
 
 
 jobs:
   Clang-Format:
-    #if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
+      
     steps:
     - uses: actions/checkout@v2
       with:
@@ -20,8 +18,7 @@ jobs:
         #ref: ${{ github.event.pull_request.head.ref }}
         #repository: ${{ github.event.pull_request.head.repo.full_name }}
         ref: ${{ github.head_sha }}
-
-    
+      
     - id: get_change_files
       uses: fish9167/file-changes-action@v1.2.3
       with:
@@ -40,30 +37,27 @@ jobs:
         extensions: 'c,h,hpp,cpp,cxx'
         style: file
         inplace: True
-
-    - name: Commit files
-      run: |
-        git config --local user.name "github-actions-clang-format[bot]"
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git commit -a -m 'Automated clang-format update'
-      continue-on-error: true
       
     - name: Create Pull Request 
-      # 如果有格式化，才继续
-      #if: steps.format.outputs.has-changes == 'true'
       uses: fish9167/create-pull-request@v3
       with:
           title: '[Bot] Automated PR to fix formatting errors'
           body: |
             Automated PR to fix formatting errors
           committer: fish0607 <yuj0607@163.com>
+          author: fish0607 <yuj0607@163.com>
+          commit-message: "[ci skip][AUTO]: Automated clang-format update: ${{ github.event.pull_request.head.sha }}  (#${{ github.event.number }})"
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
-          token: ${{ githup.BOT_TOKEN }}
+          token: ${{ secrets.BOT_TOKEN }}
+          push-to-fork: fish0607/test
+          #base: ${{ github.base_ref }}
           # 对应的上传分支
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
           delete-branch: true
+          milestone: 1
+
           
     #- uses: fish9167/git-auto-commit-action@v4
     #  with:
