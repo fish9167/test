@@ -59,7 +59,7 @@ jobs:
           committer: fish0607 <yuj0607@163.com>
           #assignees: xxx,xxx
           #reviewers: xxx,xxx
-          token: ${{ githup.bot_token }}
+          token: ${{ githup.BOT_TOKEN }}
           # 对应的上传分支
           branch: t/bot/fix-format
           branch-suffix: short-commit-hash
