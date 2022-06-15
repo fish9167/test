@@ -7,10 +7,10 @@ on:
 jobs:
   GetPR-Win:
     runs-on: windows-2019
-      steps:
-        - name: pr-number-action
-          id: id
-          uses: kkak10/pr-number-action@v1.3
-        - run: echo ${{steps.id.outputs.pr}}
+    steps:
+      - name: pr-number-action
+        id: id
+        uses: kkak10/pr-number-action@v1.3
+      - run: echo ${{steps.id.outputs.pr}}
    
  
