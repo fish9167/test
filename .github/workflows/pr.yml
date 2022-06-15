@@ -1,0 +1,16 @@
+name: PR Number
+
+on:
+  pull_request:
+  issue_comment:
+
+jobs:
+  GetPR-Win:
+    runs-on: windows-2019
+      steps:
+        - name: pr-number-action
+          id: id
+          uses: kkak10/pr-number-action@v1.3
+        - run: echo ${{steps.id.outputs.pr}}
+   
+ 
